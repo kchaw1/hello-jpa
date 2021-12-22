@@ -3,15 +3,21 @@ package hellojpa;
 import javax.persistence.*;
 
 @Entity
-@SequenceGenerator(name = "member_seq", sequenceName = "seq_member")
+@SequenceGenerator(
+        name = "member_seq_generator",
+        sequenceName = "member_seq"
+)
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "member_seq_generator")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "name", nullable = false)
     private String username;
+
+    public Member() {
+    }
 
     public Long getId() {
         return id;
@@ -27,8 +33,5 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public Member() {
     }
 }
