@@ -3,17 +3,16 @@ package hellojpa;
 import javax.persistence.*;
 
 @Entity
-public class Locker {
+public class Child {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "LOCKER_ID")
+    @GeneratedValue
     private Long id;
-
     private String name;
 
-    @OneToOne(mappedBy = "locker")
-    private Member member;
+    @ManyToOne
+    @JoinColumn(name = "PARENT_ID")
+    private Parent parent;
 
     public Long getId() {
         return id;
@@ -31,11 +30,11 @@ public class Locker {
         this.name = name;
     }
 
-    public Member getMember() {
-        return member;
+    public Parent getParent() {
+        return parent;
     }
 
-    public void setMember(Member member) {
-        this.member = member;
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 }
